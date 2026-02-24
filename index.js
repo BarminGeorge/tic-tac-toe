@@ -105,16 +105,12 @@ function cellClickHandler(row, col) {
     currentStep++;
 }
 
-// ---- Сброс игры ----
 function resetClickHandler() {
-    // Очистить массив поля
     FIELD.fill(-1);
-    // Сбросить состояние игры
     currentPlayer = CROSS;
     currentStep = 1;
     gameEnded = false;
 
-    // Перерисовать все клетки пустыми
     for (let row = 0; row < 3; row++) {
         for (let col = 0; col < 3; col++) {
             renderSymbolInCell(EMPTY, row, col, '#333');
@@ -122,7 +118,6 @@ function resetClickHandler() {
     }
 }
 
-// ---- Инициализация и слушатели ----
 function startGame() {
     renderGrid(3);
 }
@@ -146,7 +141,6 @@ function addResetListener() {
     resetButton.addEventListener('click', resetClickHandler);
 }
 
-// Запуск игры
 startGame();
 addResetListener();
 
