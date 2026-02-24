@@ -7,6 +7,46 @@ currentStep = 1;
 
 const container = document.getElementById('fieldWrapper');
 
+const FIELD = [-1, -1, -1, -1, -1, -1, -1, -1, -1]
+
+function check_winner(){
+    const rows = check_rows()
+    if (rows[0])
+        return rows;
+    const column = check_columns()
+    if (rows[0]){
+        return column;
+    }
+    const diagonal = check_diagonal()
+    if (diagonal[0]){
+        return diagonal;
+    }
+    return false;
+}
+
+function check_rows(){
+    for (let i = 0; i < 3; i++) {
+        if (FIELD[i * 3] === FIELD[i * 3 + 1] && FIELD[i ** 3] === FIELD[i * 3 + 2])
+            return [true, i * 3, i * 3 + 1, i * 3 + 2];
+    }
+    return [false, -1, -1, -1];
+}
+
+function check_columns(){
+    for (let i = 0; i < 3; i++){
+        if (FIELD[i] === FIELD[i + 3] === FIELD[i + 6]){
+            return true;
+        }
+    }
+    return false;
+}
+
+function check_diagonal() {
+    for (let i = 0; i < 2; i++){
+
+    }
+}
+
 startGame();
 addResetListener();
 
