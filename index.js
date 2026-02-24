@@ -81,10 +81,12 @@ function cellClickHandler (row, col) {
         case CROSS:
             renderSymbolInCell(CROSS, row, col);
             currentPlayer = ZERO;
+            fillField(row, col, CROSS)
             break;
         case ZERO:
             renderSymbolInCell(ZERO, row, col);
             currentPlayer = CROSS;
+            fillField(row, col, ZERO)
             break;
     }
 
@@ -93,6 +95,14 @@ function cellClickHandler (row, col) {
     if (currentStep > 9){
         alert("Победила дружба")
     }
+}
+
+function indexByRowsAndCols (row, col){
+    return 3 * row + col;
+}
+
+function fillField(row, col, symbol){
+    FIELD[indexByRowsAndCols(row, col)] = symbol;
 }
 
 function renderSymbolInCell (symbol, row, col, color = '#333') {
@@ -113,7 +123,14 @@ function addResetListener () {
 }
 
 function resetClickHandler () {
-    console.log('reset!');
+    //console.log('reset!');
+    for (let row = 0; row < 3; row++) {
+        for (let col = 0; col < 3; col++) {
+            symbol = FIELD[indexByRowsAndCols(row, col)];
+            renderSymbolInCell(symbol, row, col, color = '#FFF');
+            fillField(row, col, -1);
+        }
+    }
 }
 
 
