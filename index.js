@@ -42,9 +42,11 @@ function check_columns(){
 }
 
 function check_diagonal() {
-    for (let i = 0; i < 2; i++){
-
-    }
+    if (FIELD[0] === FIELD[4] === FIELD[8])
+        return [true, 0, 4, 8];
+    if (FIELD[2] === FIELD[4] === FIELD[6])
+        return [true, 2, 4, 6];
+    return [false, -1, -1, -1];
 }
 
 startGame();
@@ -80,11 +82,19 @@ function cellClickHandler (row, col) {
     switch (currentPlayer) {
         case CROSS:
             renderSymbolInCell(CROSS, row, col);
+            const winner = check_winner();
+            if (winner[0])
+                alert("winner")
+
             currentPlayer = ZERO;
             fillField(row, col, CROSS)
             break;
         case ZERO:
             renderSymbolInCell(ZERO, row, col);
+            const zero_win = check_winner();
+            if (zero_win[0])
+                alert("winner")
+
             currentPlayer = CROSS;
             fillField(row, col, ZERO)
             break;
