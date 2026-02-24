@@ -2,6 +2,9 @@ const CROSS = 'X';
 const ZERO = 'O';
 const EMPTY = ' ';
 
+currentPlayer = CROSS;
+currentStep = 1;
+
 const container = document.getElementById('fieldWrapper');
 
 startGame();
@@ -28,12 +31,28 @@ function renderGrid (dimension) {
 
 function cellClickHandler (row, col) {
     // Пиши код тут
-    console.log(`Clicked on cell: ${row}, ${col}`);
+    //console.log(`Clicked on cell: ${row}, ${col}`);
 
 
     /* Пользоваться методом для размещения символа в клетке так:
         renderSymbolInCell(ZERO, row, col);
      */
+    switch (currentPlayer) {
+        case CROSS:
+            renderSymbolInCell(CROSS, row, col);
+            currentPlayer = ZERO;
+            break;
+        case ZERO:
+            renderSymbolInCell(ZERO, row, col);
+            currentPlayer = CROSS;
+            break;
+    }
+
+    currentStep++;
+
+    if (currentStep > 9){
+        alert("Победила дружба")
+    }
 }
 
 function renderSymbolInCell (symbol, row, col, color = '#333') {
